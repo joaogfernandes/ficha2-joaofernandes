@@ -16,6 +16,15 @@ app.use((req, res, next) => {
   next();
 });
 
+
+app.get("/cartas", (req, res) => {
+  const items = cards.map(card => `<li>${card.name}</li>`).join("");
+  res.send(`
+    <h1>Cartas</h1>
+    <ul>${items}</ul>
+  `);
+});
+
 app.get("/", (req, res) => {
   res.send(`
     <h1>A minha coleção de cartas</h1>
@@ -32,13 +41,6 @@ app.get("/sobre", (req, res) => {
   `);
 });
 
-app.get("/cartas", (req, res) => {
-  const items = cards.map(card => `<li>${card.name}</li>`).join("");
-  res.send(`
-    <h1>Cartas</h1>
-    <ul>${items}</ul>
-  `);
-});
 
 app.get("/agora", (req, res) => {
   const now = new Date().toLocaleString("pt-PT");
